@@ -1,0 +1,6 @@
+{
+  "name": "AI-Powered IELTS CBT Simulator",
+  "description": "An AI-powered IELTS CBT simulator with strict examiner-style evaluation and explainable scoring for Writing and Speaking modules.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

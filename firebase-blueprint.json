@@ -1,0 +1,96 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile data. Kept separate if needed.",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["email", "createdAt", "updatedAt"]
+    },
+    "Essay": {
+      "title": "Essay",
+      "description": "A Writing Task 2 attempt by a user.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "promptId": { "type": "string" },
+        "content": { "type": "string" },
+        "status": { "type": "string", "enum": ["draft", "submitted", "graded"] },
+        "bandScore": { "type": "number" },
+        "scores": {
+          "type": "object",
+          "properties": {
+            "taskResponse": { "type": "number" },
+            "coherence": { "type": "number" },
+            "lexical": { "type": "number" },
+            "grammar": { "type": "number" }
+          }
+        },
+        "feedback": { "type": "string" },
+        "metrics": {
+          "type": "object",
+          "properties": {
+            "wordCount": { "type": "number" }
+          }
+        },
+        "submittedAt": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "promptId", "status", "createdAt", "updatedAt"]
+    },
+    "SpeakingAttempt": {
+      "title": "SpeakingAttempt",
+      "description": "A Speaking Part 2 attempt by a user.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "cueCardId": { "type": "string" },
+        "audioUrl": { "type": "string" },
+        "transcript": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "processed", "graded"] },
+        "bandScore": { "type": "number" },
+        "scores": {
+          "type": "object",
+          "properties": {
+            "fluency": { "type": "number" },
+            "lexical": { "type": "number" },
+            "grammar": { "type": "number" },
+            "pronunciation": { "type": "number" }
+          }
+        },
+        "feedback": { "type": "string" },
+        "metrics": {
+            "type": "object",
+            "properties": {
+                "wordsPerMinute": { "type": "number" },
+                "duration": { "type": "number" }
+            }
+        },
+        "submittedAt": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "cueCardId", "status", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Public and basic user profile information."
+    },
+    "essays/{essayId}": {
+      "schema": "Essay",
+      "description": "Writing Task 2 attempts."
+    },
+    "speakingAttempts/{attemptId}": {
+      "schema": "SpeakingAttempt",
+      "description": "Speaking Part 2 attempts."
+    }
+  }
+}
